@@ -1,0 +1,66 @@
+Peter Teeson: 
+What I did to compile USBProberV2 on Yosemite 10.10.5 & Xcode 6.4
+
+======= Step I - try to build got 3 Errors
+
+In http://opensource.apple.com/
+OS X 10.8.5 I downloaded IOUSBFamily-630.4.5 USBProberV2
+This did not build until I found & added missing code for:
+
+1. USBLogger.h 
+It is an empty file in OS X 10.8.5 IOUSBFamily 630.4.5. USBProberV2
+Copied the contents of OS X 10.8.4 IOUSBFamily 560.4.2 USBProberV2
+because the OS X 10.8.5 had a USBLogger.h but there was no content.
+ 
+Also the copyright symbol on line 2 is bad viz �. Replaced with ©.
+
+2. Similarly for KextInfoGatherer.h, KextInfoGatherer.m
+They are both empty files in IOUSBFamily-630.4.5 USBProberV2
+Copied the contents of OS X 10.8.4 IOUSBFamily 560.4.2 USBProberV2
+because the OS X 10.8.5 had KextInfoGatherer.h, KextInfoGatherer.m
+but there was no content.
+
+Also the copyright symbol on line 2 is bad viz �. Replaced with ©.
+
+At this point there were no more Errors but 31 Warnings.
+
+======= Step II - clear 31 warnings- 1 Validate 5 Klog and 25 USBPprober
+
+1 Validate project settings - Update to recommended settings
+
+***Fixed 5 Klog issues - 4 of these were deprecations for IODataQueue.
+The IODataQueue.h file contained this:
+"#warning "IODataQueue is deprecated due to security issues in its interfaces, 
+please use IOSharedDataQueue instead"
+
+In file KLogClient.h replacing with IOSharedDataQueue 
+and commenting out the extra #include IODataQueue in KLogClient.cpp
+eliminated the 4 warnings
+
+The 5th warning was for InfoPlist.strings:0: 
+"The specified input encoding is Western (Mac OS Roman), 
+but file contents appear to be Unicode (UTF-16); 
+treating as Unicode (UTF-16)."
+
+There were 2 bad characters at the beginning of the file.
+Removing them cleared the warning.
+
+***Fixed 25 USBProber deprecation issues.
+There were 6 deprecations for 
+'NSOKButton' is deprecated: first deprecated in OS X 10.10 - Use NSModalResponseOK instead.
+in files 
+KernelExtensionsController.m IORegistryController.m, USBLoggerController.m, 
+BusProbeController.m, and PortStatusController.m
+
+Replacing them with NSModalResponseOK cleared those 6 warnings
+
+There were 5 deprecations for
+'NSRunAlertPanel' is deprecated: first deprecated in OS X 10.10 - Use NSAlert instead
+in file USBLoggerController.m, 
+
+Replacing them with NSAlert cleared those 5 warnings
+
+
+
+Usage: USB Prober --busprobe [--vendorID --productID --deviceClass 
+--deviceSubClass --deviceProtocol --XML]
