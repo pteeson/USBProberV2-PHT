@@ -26,7 +26,7 @@ At this point there were no more Errors but 31 Warnings.
 
 ======= Step II - clear 31 warnings- 1 Validate 5 Klog and 25 USBPprober
 
-1 Validate project settings - Update to recommended settings
+!!!!!!TO DO 1 Validate project settings - Update to recommended settings
 
 ***Fixed 5 Klog issues - 4 of these were deprecations for IODataQueue.
 The IODataQueue.h file contained this:
@@ -45,7 +45,7 @@ treating as Unicode (UTF-16)."
 There were 2 bad characters at the beginning of the file.
 Removing them cleared the warning.
 
-***Fixed 25 USBProber deprecation issues.
+***Fixed 6 of 25 USBProber deprecation issues.
 There were 6 deprecations for 
 'NSOKButton' is deprecated: first deprecated in OS X 10.10 - Use NSModalResponseOK instead.
 in files 
