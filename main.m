@@ -62,12 +62,11 @@ int main(int argc, const char *argv[])
 // PHT  [NSBundle loadNibNamed:@"MainMenu" owner:NSApp];
         NSBundle *mainBundle = [NSBundle mainBundle];   // PHT
         nibLoaded = [mainBundle loadNibNamed:@"MainMenu" owner:NSApp topLevelObjects:&topLevelObjs];    // PHT
-        if (nibLoaded) {  // PHT
-            [NSApp run];
-        }  // PHT
-        
-//PHT TO DO should  return -1 of the nib is not loaded.....
-
+        if (!nibLoaded) {  // PHT
+            [pool release];
+            return -1;
+        } // PHT
+        [NSApp run];
 	}
 	else
 	{
