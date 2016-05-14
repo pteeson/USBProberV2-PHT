@@ -65,6 +65,9 @@ int main(int argc, const char *argv[])
         if (nibLoaded) {  // PHT
             [NSApp run];
         }  // PHT
+        
+//PHT TO DO should  return -1 of the nib is not loaded.....
+
 	}
 	else
 	{
