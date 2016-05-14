@@ -30,11 +30,14 @@ int main(int argc, const char *argv[])
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	
 	NSArray *args = [[NSProcessInfo processInfo] arguments];	
-
+    
 	NSEnumerator *enm = [args objectEnumerator];
     id word;
 	bool busProbe = false; bool showHelp = false;
-	
+
+    NSArray *topLevelObjs;      // PHT
+    bool nibLoaded  = false;    // PHT
+    
     while (word = [enm nextObject]) 
 	{
 		if ( [word caseInsensitiveCompare:[NSString stringWithUTF8String:"--busprobe"]] == NSOrderedSame )
@@ -55,14 +58,19 @@ int main(int argc, const char *argv[])
 	if ( !busProbe && !showHelp )
 	{
 		[NSApplication sharedApplication];
-        [NSBundle loadNibNamed:@"MainMenu" owner:NSApp];
-		
-		[NSApp run];
+        
+// PHT  [NSBundle loadNibNamed:@"MainMenu" owner:NSApp];
+        NSBundle *mainBundle = [NSBundle mainBundle];   // PHT
+        nibLoaded = [mainBundle loadNibNamed:@"MainMenu" owner:NSApp topLevelObjects:&topLevelObjs];    // PHT
+        if (nibLoaded) {  // PHT
+            [NSApp run];
+        }  // PHT
 	}
 	else
 	{
 	    BusProbeController *ctr = [[BusProbeController alloc] init];
 		[ctr dumpToTerminal:args showHelp:showHelp];
+        [ctr release];  // PHT
 	}
 	
     [pool release];

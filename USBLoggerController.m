@@ -123,10 +123,7 @@ static int remainingFreshEntries = 0;
     _klogKextIsCorrectRevision = [self isKlogCorrectRevision];
     
     _refreshTimer = [[NSTimer scheduledTimerWithTimeInterval: (NSTimeInterval) LOGGER_REFRESH_INTERVAL
-                                                      target:                         self
-                                                    selector:                       @selector(handlePendingOutput:)
-                                                    userInfo:                       nil
-                                                     repeats:                        YES] retain];
+            target: self selector: @selector(handlePendingOutput:) userInfo: nil repeats: YES] retain];
 
     [self setupRecentSearchesMenu];
 }
@@ -181,15 +178,17 @@ static int remainingFreshEntries = 0;
     [_outputLock unlock];
 }
 
-- (IBAction)MarkOutput:(id)sender
-{
-    NSCalendarDate *currentDate;
+- (IBAction)MarkOutput:(id)sender {
+// PHT   NSCalendarDate *currentDate;
+// PHT
+// PHT   currentDate = [NSCalendarDate date];
+// PHT   [currentDate setCalendarFormat:@"%b %d %H:%M:%S"];
+// PHT   [self appendOutput:[NSString stringWithFormat:@"\n\t\t**** %@ ****\n\n",currentDate] atLevel:[NSNumber numberWithInt:0]];
     
-    currentDate = [NSCalendarDate date];
-    [currentDate setCalendarFormat:@"%b %d %H:%M:%S"];
-
-    [self appendOutput:[NSString stringWithFormat:@"\n\t\t**** %@ ****\n\n",currentDate] atLevel:[NSNumber numberWithInt:0]];
-    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];                // PHT
+    dateFormatter.dateStyle = NSDateFormatterMediumStyle;                           // PHT
+    NSString *formattedDateString = [dateFormatter stringFromDate:[NSDate date]];   // PHT
+    [self appendOutput:[NSString stringWithFormat:@"\n\t\t**** %@ ****\n\n", formattedDateString] atLevel:0];  //PHT
 }
 
 /*- (IBAction)SaveOutput:(id)sender
@@ -240,34 +239,66 @@ static int remainingFreshEntries = 0;
     }];
 }
 
-- (IBAction)Start:(id)sender
-{
+- (IBAction)Start:(id)sender {
     if (!_klogKextisPresent) {
-        int result = NSRunAlertPanel (@"Missing Kernel Extension", @"The required kernel extension \"KLog.kext\" is not installed. Would you like to install it now?", @"Install", @"Cancel", nil);
-        if (result == NSAlertDefaultReturn) {
+// PHT int result = NSRunAlertPanel (@"Missing Kernel Extension",
+// PHT @"The required kernel extension \"KLog.kext\" is not installed.
+// PHT Would you like to install it now?", @"Install", @"Cancel", nil);
+        NSAlert *alert = [[NSAlert alloc] init];            // PHT
+        [alert addButtonWithTitle:@"Install"];              // PHT
+        [alert addButtonWithTitle:@"Cancel"];               // PHT
+        [alert setAlertStyle:NSCriticalAlertStyle];         // PHT
+        alert.messageText = @"Missing Kernel Extension";    // PHT
+        alert.informativeText = @"The required kernel extension \"KLog.kext\" is not installed. Would you like to install it now?";             // PHT
+        NSModalResponse result = [alert runModal];          // PHT
+        [alert release];                                    // PHT
+        
+// PHT  if (result == NSAlertDefaultReturn) {
+        if (result == NSAlertFirstButtonReturn) {           // PHT
             //try to install
             if ([self installKLogKext] != YES) {
                 // error occured while installing, so return
                 return;
             } else {
 				_klogKextisPresent = YES;
-				_klogKextIsCorrectRevision = YES;
+//				_klogKextIsCorrectRevision = YES;
+// BUG PHT TO DO if revision is wrong (my test case) then this ignores it NEED A FIX But where?
 			}
         } else {
             // user does not want to install KLog.kext, so return
             return;
         }
-    } else if ( !_klogKextIsCorrectRevision )
-	{
-        int result = NSRunAlertPanel (@"Wrong revision for Kernel Extension", @"The required kernel extension \"KLog.kext\" is not the right revision. Would you like to upgrade it now?", @"Upgrade", @"Cancel", nil);
-        if (result == NSAlertDefaultReturn) {
+    } else if ( !_klogKextIsCorrectRevision ) {
+// PHT int result = NSRunAlertPanel (@"Wrong revision for Kernel Extension",
+// PHT @"The required kernel extension \"KLog.kext\" is not the right revision.
+// PHT Would you like to upgrade it now?", @"Upgrade", @"Cancel", nil);
+        NSAlert *alert = [[NSAlert alloc] init];            // PHT
+        [alert addButtonWithTitle:@"Upgrade"];              // PHT
+        [alert addButtonWithTitle:@"Cancel"];               // PHT
+        [alert setAlertStyle:NSCriticalAlertStyle];         // PHT
+        alert.messageText = @"Wrong revision for Kernel Extension";    // PHT
+        alert.informativeText = @"The required kernel extension \"KLog.kext\" is not the right revision. Would you like to upgrade it now?";                                           // PHT
+        NSModalResponse result = [alert runModal];           // PHT
+        [alert release];                                     // PHT
+        
+// PHT  if (result == NSAlertDefaultReturn) {
+        if (result == NSAlertFirstButtonReturn) {            // PHT
             //try to install
             if ([self removeAndinstallKLogKext] != YES) {
                 // error occured while installing, so return
                 return;
-            } else 
-			{
-				NSRunAlertPanel (@"Need to Restart", @"The required kernel extension \"KLog.kext\" was installed.  Please quit and restart.", @"OK", nil, nil);
+            } else {
+                
+// PHT NSRunAlertPanel (@"Need to Restart", @"The required kernel extension \"KLog.kext\" was installed.
+// PHT Please quit and restart.", @"OK", nil, nil);
+                NSAlert *alert = [[NSAlert alloc] init];            // PHT
+                [alert addButtonWithTitle:@"OK"];                   // PHT
+                [alert setAlertStyle:NSCriticalAlertStyle];         // PHT
+                alert.messageText = @"Need to Restart";             // PHT
+                alert.informativeText = @"The required kernel extension \"KLog.kext\" was installed. Please quit and restart.";                                      // PHT
+                [alert runModal];                                   // PHT
+                [alert release];                                    // PHT
+                
 				_klogKextIsCorrectRevision = NO;
 				return;
 			}
@@ -275,13 +306,16 @@ static int remainingFreshEntries = 0;
             // user does not want to install KLog.kext, so return
             return;
 		}
-	}
+    }
     
     if ([DumpCheckBox state] == NSOnState) 
     {
         NSSavePanel *sp;
-        NSCalendarDate *currentDate = [NSCalendarDate date];
-        
+// PHT        NSCalendarDate *currentDate = [NSCalendarDate date];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];                // PHT
+        dateFormatter.dateStyle = NSDateFormatterMediumStyle;                           // PHT
+        NSString *formattedDateString = [dateFormatter stringFromDate:[NSDate date]];   // PHT
+
         sp = [NSSavePanel savePanel];
         [sp setAllowedFileTypes:[NSArray arrayWithObjects:@"txt", nil]];
         
@@ -297,11 +331,19 @@ static int remainingFreshEntries = 0;
         
                 _dumpingFile = fopen ([theFileName cStringUsingEncoding:NSUTF8StringEncoding],"w");
         if (_dumpingFile == NULL) {
-                    [self appendOutput:[NSString stringWithFormat:@"%@: Error - unable to open the file %@\n\n",currentDate,theFileName] atLevel:[NSNumber numberWithInt:0]];
+// PHT  [self appendOutput:[NSString stringWithFormat:@"%@: Error - unable to open the file %@\n\n",currentDate,theFileName] atLevel:[NSNumber numberWithInt:0]];
+            [self appendOutput:[NSString stringWithFormat:@"%@: Error - unable to open the file %@\n\n",formattedDateString,theFileName] atLevel:[NSNumber numberWithInt:0]];   // PHT
         } else {
-            [currentDate setCalendarFormat:@"%b %d %H:%M:%S"];
-                    [self appendOutput:[NSString stringWithFormat:@"%@: Saving output to file %@\n\n",currentDate,theFileName] atLevel:[NSNumber numberWithInt:0]];
-                }
+// PHT   [currentDate setCalendarFormat:@"%b %d %H:%M:%S"];
+// PHT    [self appendOutput:[NSString stringWithFormat:@"%@: Saving output to file %@\n\n",currentDate,theFileName]
+// PHT      atLevel:[NSNumber numberWithInt:0]];
+            
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];                // PHT
+            dateFormatter.dateStyle = NSDateFormatterMediumStyle;                           // PHT
+            NSString *formattedDateString = [dateFormatter stringFromDate:[NSDate date]];   // PHT
+            [self appendOutput:[NSString stringWithFormat:@"%@: Saving output to file %@\n\n",formattedDateString,theFileName]
+                atLevel:0]; //PHT
+        }
                 [self actuallyStartLogging];
             }
         }];
@@ -312,8 +354,7 @@ static int remainingFreshEntries = 0;
     }
 }
 
-- (void) actuallyStartLogging
-{
+- (void) actuallyStartLogging {
     if (_logger == nil) {
         _logger = [[USBLogger alloc] initWithListener:self level:[[LoggingLevelPopUp selectedItem] tag]];
         
@@ -325,8 +366,7 @@ static int remainingFreshEntries = 0;
     [StartStopButton setTitle:@"Stop"];
 }
 
-- (IBAction)Stop:(id)sender
-{
+- (IBAction)Stop:(id)sender {
     if (_dumpingFile != NULL) {
         fclose(_dumpingFile);
         _dumpingFile = NULL;
@@ -343,8 +383,7 @@ static int remainingFreshEntries = 0;
     [DumpCheckBox setEnabled:YES];
 }
 
-- (IBAction)ToggleDumping:(id)sender
-{
+- (IBAction)ToggleDumping:(id)sender {
 }
 
 - (IBAction)FilterOutput:(id)sender {
@@ -396,81 +435,97 @@ static int remainingFreshEntries = 0;
 		return [[NSFileManager defaultManager] fileExistsAtPath:@"/System/Library/Extensions/KLog.kext"];
 	}
 	
-	- (BOOL)isKlogCorrectRevision {
-		NSBundle	* klogBundle = [NSBundle bundleWithPath:@"/System/Library/Extensions/KLog.kext"];
-		
-		if ( klogBundle == nil)
-			return NO;
-		
-		NSDictionary *plist = [klogBundle infoDictionary];
-		uint32_t version = [[plist valueForKey:@"CFBundleNumericVersion"] intValue];
-		if ( (version < 0x03600000) && (version != 0) )
-			return NO;
-		else
-			return YES;
-		}
+- (BOOL)isKlogCorrectRevision {
+    NSBundle	* klogBundle = [NSBundle bundleWithPath:@"/System/Library/Extensions/KLog.kext"];
+    
+    if ( klogBundle == nil)
+        return NO;
+    
+    NSDictionary *plist = [klogBundle infoDictionary];
+    uint32_t version = [[plist valueForKey:@"CFBundleNumericVersion"] intValue];
+    if ( (version < 0x03600000) && (version != 0) )
+        return NO;
+    else
+        return YES;
+}
 	
-	- (BOOL)installKLogKext {
-		NSString *              sourcePath = [[NSBundle mainBundle] pathForResource:@"KLog" ofType:@"kext"];
-		NSString *              destPath = [NSString pathWithComponents:[NSArray arrayWithObjects:@"/",@"System",@"Library",@"Extensions",@"KLog.kext",nil]];
-		NSString *              permRepairPath = [[NSBundle mainBundle] pathForResource:@"SetKLogPermissions" ofType:@"sh"];
-		
-		AuthorizationRights     myRights;
-		AuthorizationItem       myItems[1];
-		AuthorizationRef        authorizationRef;
-		OSStatus                err;
-		
-		if ([[NSFileManager defaultManager] fileExistsAtPath:sourcePath] == NO) {
-			NSRunAlertPanel (@"Missing Source File", @"\"KLog.kext\" could not be installed because it is missing from the application bundle.", @"Okay", nil, nil);
-			return NO;
-		}
-		
-		myItems[0].name = kAuthorizationRightExecute;
-		myItems[0].valueLength = 0;
-		myItems[0].value = NULL;
-		myItems[0].flags = 0;
-		
-		myRights.count = sizeof(myItems) / sizeof(myItems[0]);
-		myRights.items = myItems;
-		
-		err = AuthorizationCreate (&myRights, kAuthorizationEmptyEnvironment, kAuthorizationFlagInteractionAllowed | kAuthorizationFlagExtendRights, &authorizationRef);
-		
-		if (err == errAuthorizationSuccess) {
-			char *  cpArgs[4];
-			char *  shArgs[2];
-			char *  kextloadArgs[2];
-			int     status;
-			
-			cpArgs[0] = "-r";
-			cpArgs[1] = (char *)[sourcePath cStringUsingEncoding:NSUTF8StringEncoding];
-			cpArgs[2] = (char *)[destPath cStringUsingEncoding:NSUTF8StringEncoding];
-			cpArgs[3] = NULL;
-			
-			err = AuthorizationExecuteWithPrivileges(authorizationRef, "/bin/cp", 0, cpArgs, NULL);
-			if (err) return NO;
-			
-			shArgs[0] = (char *)[permRepairPath cStringUsingEncoding:NSUTF8StringEncoding];
-			shArgs[1] = NULL;
-			
-			err = AuthorizationExecuteWithPrivileges(authorizationRef, "/bin/sh", 0, shArgs, NULL);
-			if (err) return NO;
-			
-			kextloadArgs[0] = (char *)[destPath cStringUsingEncoding:NSUTF8StringEncoding];
-			kextloadArgs[1] = NULL;
-			
-			err = AuthorizationExecuteWithPrivileges(authorizationRef, "/sbin/kextload", 0, kextloadArgs, NULL);
-			if (err) return NO;
-			
-			while (wait(&status) != -1) {
-				// wait for forked process to terminate
-			}
-			
-			AuthorizationFree(authorizationRef, kAuthorizationFlagDestroyRights);
-			return YES;
-		} else {
-			return NO;
-		}
-	}
+- (BOOL)installKLogKext {
+    NSString *              sourcePath = [[NSBundle mainBundle] pathForResource:@"KLog" ofType:@"kext"];
+    NSString *              destPath = [NSString pathWithComponents:[NSArray arrayWithObjects:@"/",@"System",@"Library",@"Extensions",@"KLog.kext",nil]];
+    NSString *              permRepairPath = [[NSBundle mainBundle] pathForResource:@"SetKLogPermissions" ofType:@"sh"];
+    
+    AuthorizationRights     myRights;
+    AuthorizationItem       myItems[1];
+    AuthorizationRef        authorizationRef;
+    OSStatus                err;
+
+// PHT Is the kext in the NSProberV2 Bundle?
+    if ([[NSFileManager defaultManager] fileExistsAtPath:sourcePath] == NO) {
+// PHT	NSRunAlertPanel (@"Missing Source File", @"\"KLog.kext\" could not be installed because it is missing
+// PHT   from the application bundle.", @"Okay", nil, nil);
+
+        NSAlert *alert = [[NSAlert alloc] init];            // PHT
+        [alert addButtonWithTitle:@"OK"];                   // PHT
+        [alert setAlertStyle:NSCriticalAlertStyle];         // PHT
+        alert.messageText = @"Missing Source File";         // PHT
+        alert.informativeText = @"\"KLog.kext\" could not be installed because it is missing from the application bundle."; // PHT
+        [alert runModal];                                   // PHT
+        [alert release];                                    // PHT
+        
+        return NO;
+    }
+    
+// PHT The kext exists in the Bundle
+    myItems[0].name = kAuthorizationRightExecute;
+    myItems[0].valueLength = 0;
+    myItems[0].value = NULL;
+    myItems[0].flags = 0;
+    
+    myRights.count = sizeof(myItems) / sizeof(myItems[0]);
+    myRights.items = myItems;
+    
+    err = AuthorizationCreate (&myRights, kAuthorizationEmptyEnvironment, kAuthorizationFlagInteractionAllowed | kAuthorizationFlagExtendRights, &authorizationRef);
+    
+    if (err == errAuthorizationSuccess) {
+        char *  cpArgs[4];
+        char *  shArgs[2];
+        char *  kextloadArgs[2];
+        int     status;
+        
+        cpArgs[0] = "-r";
+        cpArgs[1] = (char *)[sourcePath cStringUsingEncoding:NSUTF8StringEncoding];
+        cpArgs[2] = (char *)[destPath cStringUsingEncoding:NSUTF8StringEncoding];
+        cpArgs[3] = NULL;
+    
+// PHT Try to copy it to the /Systems/Library/Extensions folder
+        err = AuthorizationExecuteWithPrivileges(authorizationRef, "/bin/cp", 0, cpArgs, NULL);
+        if (err) return NO;
+        
+        shArgs[0] = (char *)[permRepairPath cStringUsingEncoding:NSUTF8StringEncoding];
+        shArgs[1] = NULL;
+        
+// PHT Try to set the Kext privileges
+        err = AuthorizationExecuteWithPrivileges(authorizationRef, "/bin/sh", 0, shArgs, NULL);
+        if (err) return NO;
+        
+        kextloadArgs[0] = (char *)[destPath cStringUsingEncoding:NSUTF8StringEncoding];
+        kextloadArgs[1] = NULL;
+        
+// PHT Try to load Kext into kernel
+        err = AuthorizationExecuteWithPrivileges(authorizationRef, "/sbin/kextload", 0, kextloadArgs, NULL);
+// PHT TO DO ?? Do we want to write to the console log or throw up an NSAlert?
+        if (err) return NO;
+        
+        while (wait(&status) != -1) {
+            // wait for forked process to terminate
+        }
+        
+        AuthorizationFree(authorizationRef, kAuthorizationFlagDestroyRights);
+        return YES;
+    } else {
+        return NO;
+    }
+}
 	
 	- (BOOL)removeAndinstallKLogKext {
 		NSString *              sourcePath = [[NSBundle mainBundle] pathForResource:@"KLog" ofType:@"kext"];
@@ -483,10 +538,20 @@ static int remainingFreshEntries = 0;
 		OSStatus                err;
 		
 		if ([[NSFileManager defaultManager] fileExistsAtPath:sourcePath] == NO) {
-			NSRunAlertPanel (@"Missing Source File", @"\"KLog.kext\" could not be installed because it is missing from the application bundle.", @"Okay", nil, nil);
-			return NO;
+// PHT	 NSRunAlertPanel (@"Missing Source File", @"\"KLog.kext\" could not be installed because it is missing
+// PHT   from the application bundle.", @"Okay", nil, nil);
+            NSAlert *alert = [[NSAlert alloc] init];            // PHT
+            [alert addButtonWithTitle:@"OK"];                   // PHT
+            [alert setAlertStyle:NSCriticalAlertStyle];         // PHT
+            alert.messageText = @"Missing Source File";         // PHT
+            alert.informativeText = @"\"KLog.kext\" could not be installed because it is missing from the application bundle."; // PHT
+            [alert runModal];                                   // PHT
+            [alert release];                                    // PHT
+			
+            return NO;
 		}
-		
+        
+// PHT The kext exists in the bundle
 		myItems[0].name = kAuthorizationRightExecute;
 		myItems[0].valueLength = 0;
 		myItems[0].value = NULL;
@@ -503,7 +568,7 @@ static int remainingFreshEntries = 0;
 			char *  kextloadArgs[2];
 			int     status;
 			
-			// Remove it
+// PHT Remove it from /System/Library/Extensions
 			cpArgs[0] = (char *)[destPath cStringUsingEncoding:NSUTF8StringEncoding];
 			cpArgs[1] = "/private/tmp";
 			cpArgs[2] = NULL;
@@ -512,7 +577,7 @@ static int remainingFreshEntries = 0;
 			err = AuthorizationExecuteWithPrivileges(authorizationRef, "/bin/mv", 0, cpArgs, NULL);
 			if (err) return NO;
 			
-			// Copy it
+// PHT try to copy it to the /Systems/Library/Extensions folder
 			cpArgs[0] = "-r";
 			cpArgs[1] = (char *)[sourcePath cStringUsingEncoding:NSUTF8StringEncoding];
 			cpArgs[2] = (char *)[destPath cStringUsingEncoding:NSUTF8StringEncoding];
@@ -523,13 +588,18 @@ static int remainingFreshEntries = 0;
 			
 			shArgs[0] = (char *)[permRepairPath cStringUsingEncoding:NSUTF8StringEncoding];
 			shArgs[1] = NULL;
-			
+// PHT Try to set the Kext privileges
 			err = AuthorizationExecuteWithPrivileges(authorizationRef, "/bin/sh", 0, shArgs, NULL);
 			if (err) return NO;
 			
 			kextloadArgs[0] = (char *)[destPath cStringUsingEncoding:NSUTF8StringEncoding];
 			kextloadArgs[1] = NULL;
-			
+            
+// BUG PHT  Whoever wrote this forgot the call to ketload.
+// BUG PHT  The next two lines copied from method installKLogKext.
+            err = AuthorizationExecuteWithPrivileges(authorizationRef, "/sbin/kextload", 0, kextloadArgs, NULL); // PHT
+            if (err) return NO; // PHT
+
 			while (wait(&status) != -1) {
 				// wait for forked process to terminate
 			}

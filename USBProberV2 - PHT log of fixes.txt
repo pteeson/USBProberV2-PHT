@@ -33,8 +33,8 @@ The IODataQueue.h file contained this:
 "#warning "IODataQueue is deprecated due to security issues in its interfaces, 
 please use IOSharedDataQueue instead"
 
-In file KLogClient.h replacing with IOSharedDataQueue 
-and commenting out the extra #include IODataQueue in KLogClient.cpp
+In file KLogClient.h replacing #include <IOKit/IODataQueue> with
+#include <IOKit/IOSharedDataQueue and commenting out the extra #include IODataQueue in KLogClient.cpp
 eliminated the 4 warnings
 
 The 5th warning was for InfoPlist.strings:0: 
@@ -45,8 +45,8 @@ treating as Unicode (UTF-16)."
 There were 2 bad characters at the beginning of the file.
 Removing them cleared the warning.
 
-***Fixed 6 of 25 USBProber deprecation issues.
-There were 6 deprecations for 
+***Fixed USBProber deprecation issues.
+********    There were 7 deprecations for
 'NSOKButton' is deprecated: first deprecated in OS X 10.10 - Use NSModalResponseOK instead.
 in files 
 KernelExtensionsController.m IORegistryController.m, USBLoggerController.m, 
@@ -54,11 +54,42 @@ BusProbeController.m, and PortStatusController.m
 
 Replacing them with NSModalResponseOK cleared those 6 warnings
 
-There were 5 deprecations for
+********    There were 5 deprecations for
 'NSRunAlertPanel' is deprecated: first deprecated in OS X 10.10 - Use NSAlert instead
 in file USBLoggerController.m, 
 
-Replacing them with NSAlert cleared those 5 warnings
+See the following methods:
+5 items in - (IBAction)Start:(id)sender
+1 item in - (BOOL)installKLogKext
+1 item in - (BOOL)removeAndinstallKLogKext
+
+Replacing them with NSAlert cleared those 7 warnings.
+
+********    There were 6 deprecations for
+'setCalendarFormat:' is deprecated: first deprecated in OS X 10.10
+and also 'NSCalendarDate'
+in file USBLoggerController.m,
+
+See the following methods:
+NSCalendarDate
+2 items in - (IBAction)MarkOutput:(id)sender
+2 items in - (IBAction)Start:(id)sender
+
+setCalendarFormat
+1 item in - (IBAction)MarkOutput:(id)sender
+1 item in - (IBAction)Start:(id)sender
+
+Replacing them with NSDateFormatter cleared those 6 warnings
+
+********    There was 1 deprecation for
+'loadNibNamed:owner:' in file main.m
+
+Replacing this with the NSBUndle instnce method
+- loadNibNamed:owner:topLevelObjects:
+cleared the warning.
+
+
+
 
 
 
