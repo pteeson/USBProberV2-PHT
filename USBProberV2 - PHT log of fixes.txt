@@ -1,4 +1,6 @@
 Peter Teeson: 
+
+
 What I did to compile USBProberV2 on Yosemite 10.10.5 & Xcode 6.4
 
 ======= Step I - try to build got 3 Errors
@@ -88,10 +90,11 @@ Replacing this with the NSBUndle instnce method
 - loadNibNamed:owner:topLevelObjects:
 cleared the warning.
 
+********    There was this bug - HOWEVER note that there are a total of 7 deprecations of AuthorizationExecuteWithPrivileges
+USBProberV2-1 PHT 10.10/USBLoggerController.m:501:// BUG PHT  Whoever wrote this forgot the call to ketload.
+USBProberV2-1 PHT 10.10/USBLoggerController.m:602:// BUG PHT  The next two lines copied from method installKLogKext.
+USBProberV2-1 PHT 10.10/USBLoggerController.m:603: err = AuthorizationExecuteWithPrivileges(authorizationRef,
+    "/sbin/kextload", 0, kextloadArgs, NULL); // PHT
+USBProberV2-1 PHT 10.10/USBLoggerController.m:604: if (err) return NO; // PHT
 
-
-
-
-
-Usage: USB Prober --busprobe [--vendorID --productID --deviceClass 
---deviceSubClass --deviceProtocol --XML]
+Usage: USB Prober --busprobe [--vendorID --productID --deviceClass --deviceSubClass --deviceProtocol --XML]

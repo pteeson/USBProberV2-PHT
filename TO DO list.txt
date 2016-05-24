@@ -1,0 +1,18 @@
+!!!!!! TO DO Validate project settings - Update to recommended settings
+!!!!!! TO DO Convert to ARC
+!!!!!! TO DO Convert to modern OBJ-C
+!!!!!! TO DO Fix the 7 deprecations of AuthorizationExecuteWithPrivileges
+
+USBProberV2-1 PHT 10.10/USBLoggerController.m:264:// BUG PHT TO DO if revision is wrong (my test case) then this ignores it
+USBProberV2-1 PHT 10.10/USBLoggerController.m:265:_klogKextIsCorrectRevision = YES;
+
+USBProberV2-1 PHT 10.10/USBLoggerController.m:517:// PHT TO DO We want to capture what is written to the console log
+USBProberV2-1 PHT 10.10/USBLoggerController.m:518:// PHT TO DO because the err variable is returning 0 all the time
+USBProberV2-1 PHT 10.10/USBLoggerController.m:519:// PHT TO DO even though executing "sbin/kextload" does write to the console log
+
+********  There was this bug - HOWEVER there are a total of 7 deprecations of AuthorizationExecuteWithPrivileges --see TO DO
+USBProberV2-1 PHT 10.10/USBLoggerController.m:601: // BUG PHT  Whoever wrote this forgot the call to ketload.
+USBProberV2-1 PHT 10.10/USBLoggerController.m:602: // BUG PHT  The next two lines copied from method installKLogKext.
+USBProberV2-1 PHT 10.10/USBLoggerController.m:603: err = AuthorizationExecuteWithPrivileges(authorizationRef,
+                                                    "/sbin/kextload", 0, kextloadArgs, NULL); // PHT
+USBProberV2-1 PHT 10.10/USBLoggerController.m:604: if (err) return NO; // PHT

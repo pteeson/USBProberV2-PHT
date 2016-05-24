@@ -261,8 +261,8 @@ static int remainingFreshEntries = 0;
                 return;
             } else {
 				_klogKextisPresent = YES;
-//				_klogKextIsCorrectRevision = YES;
-// BUG PHT TO DO if revision is wrong (my test case) then this ignores it NEED A FIX But where?
+// BUG PHT TO DO if revision is wrong (my test case) then this ignores it
+                _klogKextIsCorrectRevision = YES;
 			}
         } else {
             // user does not want to install KLog.kext, so return
@@ -431,7 +431,7 @@ static int remainingFreshEntries = 0;
     [finalOutput release];
 }
 
-	- (BOOL)isKlogKextPresent {
+- (BOOL)isKlogKextPresent {
 		return [[NSFileManager defaultManager] fileExistsAtPath:@"/System/Library/Extensions/KLog.kext"];
 	}
 	
@@ -461,6 +461,7 @@ static int remainingFreshEntries = 0;
 
 // PHT Is the kext in the NSProberV2 Bundle?
     if ([[NSFileManager defaultManager] fileExistsAtPath:sourcePath] == NO) {
+
 // PHT	NSRunAlertPanel (@"Missing Source File", @"\"KLog.kext\" could not be installed because it is missing
 // PHT   from the application bundle.", @"Okay", nil, nil);
 
@@ -513,7 +514,9 @@ static int remainingFreshEntries = 0;
         
 // PHT Try to load Kext into kernel
         err = AuthorizationExecuteWithPrivileges(authorizationRef, "/sbin/kextload", 0, kextloadArgs, NULL);
-// PHT TO DO ?? Do we want to write to the console log or throw up an NSAlert?
+// PHT TO DO We want to capture what is written to the console log
+// PHT TO DO because the err variable is returning 0 all the time
+// PHT TO DO even though executing "sbin/kextload" does write to the console log
         if (err) return NO;
         
         while (wait(&status) != -1) {

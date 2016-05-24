@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		010539381CDBDDD000140FFD /* KLog.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3ED5D6840DD4A2CE00AD5562 /* KLog.kext */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		017F84D51CDA98D700F97EF8 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0156BA651CD91D7D0043B846 /* README.txt */; };
+		017F84D61CDA98D700F97EF8 /* USBProberV2 - PHT log of fixes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0156BA661CD91D7D0043B846 /* USBProberV2 - PHT log of fixes.txt */; };
 		3E0EA9FB050D22BA009D1D9C /* USBLoggerFilterWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E0EA950050D21FB009D1D9C /* USBLoggerFilterWindowController.h */; };
 		3E0EA9FC050D22BA009D1D9C /* USBLoggerFilterWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EA951050D21FB009D1D9C /* USBLoggerFilterWindowController.m */; };
 		3E0EA9FD050D2305009D1D9C /* clean.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 3E0EA9DC050D223D009D1D9C /* clean.tiff */; };
@@ -20,7 +23,6 @@
 		3ED5D6790DD4A2CE00AD5562 /* KLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EA84A050D1F76009D1D9C /* KLog.cpp */; };
 		3ED5D67A0DD4A2CE00AD5562 /* KLogClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EA84C050D1F76009D1D9C /* KLogClient.cpp */; };
 		3ED5D67C0DD4A2CE00AD5562 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E0EA84F050D1F76009D1D9C /* InfoPlist.strings */; };
-		3ED5D6B90DD4AA9100AD5562 /* KLog.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3ED5D6840DD4A2CE00AD5562 /* KLog.kext */; };
 		3ED5D6EF0DD4AC3A00AD5562 /* KLogInfoPlist.pch in Headers */ = {isa = PBXBuildFile; fileRef = 3ED5D6EE0DD4AC3A00AD5562 /* KLogInfoPlist.pch */; };
 		7206B40D04C3392200856A2F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7206B40C04C3392200856A2F /* Security.framework */; };
 		7206B50B04C33BFD00856A2F /* SetKLogPermissions.sh in Resources */ = {isa = PBXBuildFile; fileRef = 7206B50A04C33BFD00856A2F /* SetKLogPermissions.sh */; };
@@ -114,18 +116,20 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
-				3ED5D6B90DD4AA9100AD5562 /* KLog.kext in CopyFiles */,
+				010539381CDBDDD000140FFD /* KLog.kext in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0156BA651CD91D7D0043B846 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		0156BA661CD91D7D0043B846 /* USBProberV2 - PHT log of fixes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "USBProberV2 - PHT log of fixes.txt"; sourceTree = "<group>"; };
+		01B132261CF38B3A00BDC0D8 /* TO DO list.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "TO DO list.txt"; sourceTree = "<group>"; };
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
-		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		3E0EA84A050D1F76009D1D9C /* KLog.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = KLog.cpp; path = KLog/KLog.cpp; sourceTree = "<group>"; };
 		3E0EA84B050D1F76009D1D9C /* KLog.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = KLog.h; path = KLog/KLog.h; sourceTree = "<group>"; };
@@ -276,7 +280,6 @@
 		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
 			);
 			name = "Other Frameworks";
 			sourceTree = "<group>";
@@ -293,11 +296,14 @@
 		29B97314FDCFA39411CA2CEA /* USB Prober */ = {
 			isa = PBXGroup;
 			children = (
+				0156BA651CD91D7D0043B846 /* README.txt */,
+				0156BA661CD91D7D0043B846 /* USBProberV2 - PHT log of fixes.txt */,
+				01B132261CF38B3A00BDC0D8 /* TO DO list.txt */,
+				3E146F8B050D1EE700DE0AA3 /* KLog */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
-				3E146F8B050D1EE700DE0AA3 /* KLog */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
 			name = "USB Prober";
@@ -598,6 +604,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				017F84D51CDA98D700F97EF8 /* README.txt in Resources */,
+				017F84D61CDA98D700F97EF8 /* USBProberV2 - PHT log of fixes.txt in Resources */,
 				3E0EA9FD050D2305009D1D9C /* clean.tiff in Resources */,
 				3E0EA9FE050D2305009D1D9C /* reload.tiff in Resources */,
 				8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */,
