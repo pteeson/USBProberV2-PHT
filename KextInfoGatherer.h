@@ -21,19 +21,18 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
-
+// PHT #import <IOKit/kext/OSKext.h>
+#import "OSKext.h"  // PHT replaced above with this file I created from the OS X 10.6.2 IOKit
 #import <Foundation/Foundation.h>
 #import <mach/mach.h>
 #import <mach/mach_error.h>
 #import <mach/mach_host.h>
 
-
 @interface KextInfoGatherer : NSObject {
-
+    
 }
 
 + (NSMutableArray *)loadedExtensions;
 + (NSMutableArray *)loadedExtensionsContainingString:(NSString *)string;
 
 @end
-

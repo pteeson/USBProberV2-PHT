@@ -21,14 +21,12 @@ They are both empty files in IOUSBFamily-630.4.5 USBProberV2
 Copied the contents of OS X 10.8.4 IOUSBFamily 560.4.2 USBProberV2
 because the OS X 10.8.5 had KextInfoGatherer.h, KextInfoGatherer.m
 but there was no content.
-
 Also the copyright symbol on line 2 is bad viz �. Replaced with ©.
-
+        !!! but see comments in Step III !!!
 At this point there were no more Errors but 31 Warnings.
 
 ======= Step II - clear 31 warnings- 1 Validate 5 Klog and 25 USBPprober
-
-!!!!!!TO DO 1 Validate project settings - Update to recommended settings
+***Fixed 1 Validate project settings - Update to recommended settings
 
 ***Fixed 5 Klog issues - 4 of these were deprecations for IODataQueue.
 The IODataQueue.h file contained this:
@@ -90,11 +88,24 @@ Replacing this with the NSBUndle instnce method
 - loadNibNamed:owner:topLevelObjects:
 cleared the warning.
 
-********    There was this bug - HOWEVER note that there are a total of 7 deprecations of AuthorizationExecuteWithPrivileges
-USBProberV2-1 PHT 10.10/USBLoggerController.m:501:// BUG PHT  Whoever wrote this forgot the call to ketload.
+********    There was this bug
+USBProberV2-1 PHT 10.10/USBLoggerController.m:501:// BUG PHT  Whoever wrote this forgot the call to kextload.
 USBProberV2-1 PHT 10.10/USBLoggerController.m:602:// BUG PHT  The next two lines copied from method installKLogKext.
 USBProberV2-1 PHT 10.10/USBLoggerController.m:603: err = AuthorizationExecuteWithPrivileges(authorizationRef,
-    "/sbin/kextload", 0, kextloadArgs, NULL); // PHT
+"/sbin/kextload", 0, kextloadArgs, NULL); // PHT
 USBProberV2-1 PHT 10.10/USBLoggerController.m:604: if (err) return NO; // PHT
+
+***** HOWEVER note that there are a total of 7 deprecations of AuthorizationExecuteWithPrivileges
+which still need to be fixed.
+
+======= Step III - Restore the function of the Kernel Extensions tab
+
+Apple's Open Source for a number of files was missing which meant the Kernel Extensions tab didn't work.
+So I restored source of the KextInfGatherer.h and KextInfoGatherer.m
+In addition Apple did not Export these 4 Headers to the relevant Frameworks
+OSKext.h, OSReturn.h, OSKextLib.h, and OSKextLibPrivate.h
+I had to recreate them but chose to make them local headers in this project.
+This introduced 3 format string errors KextInfoGatherer requiring fixup.
+
 
 Usage: USB Prober --busprobe [--vendorID --productID --deviceClass --deviceSubClass --deviceProtocol --XML]
