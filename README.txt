@@ -17,11 +17,11 @@ from Apple's original OS X 10.8.5 Mavericks open source code in the IOUSBFamily.
                         7 Deprecations still to remove -see below TO DO
 ======= DONE Step III - Restore the function of the Kernel Extensions tab
 
-!!!!!! TO DO 7 Warnings 'AuthorizationExecuteWithPrivileges' is deprecated: first deprecated in OS X 10.7
-    The plan is to re-write and add code to do it the recommended way with an embedded Helper app.
-    However these are only related to loading the logging kext.
+=======	TODO Step IV - What's left to do
+7 Warnings 'AuthorizationExecuteWithPrivileges' is deprecated: first deprecated in OS X 10.7
+The plan is to re-write and add code to do it the recommended way with an embedded Helper app.
+However since these are only related to loading the logging kext need to research before proceeding.
 
-    Need to research before proceeding with the above
-    (a) just what the kext actually does if loaded
-    (b) is that still supported in El Capitain and the next version of OS X (Safari?)
-    (c) what alternatives, preferably from userland without hte need for a kext.
+(a) just what the kext actually does if loaded
+(b) is that still supported in El Capitain and the next version of OS X (Safari?)
+(c) what alternatives, preferably from userland without hte need for a kext.
