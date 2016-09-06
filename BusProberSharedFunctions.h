@@ -1,5 +1,5 @@
 /*
- * Copyright © 1998-2012 Apple Inc.  All rights reserved.
+ * Copyright ï¿½ 1998-2012 Apple Inc.  All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  *
@@ -37,14 +37,14 @@ typedef struct 	IOUSBInterfaceStruct220**	 		IOUSBInterfaceRef ;
 
 #define ROOT_LEVEL                              0
 #define DEVICE_DESCRIPTOR_LEVEL			ROOT_LEVEL + 1
-#define CONFIGURATION_DESCRIPTOR_LEVEL          ROOT_LEVEL + 1
-#define INTERFACE_LEVEL                         CONFIGURATION_DESCRIPTOR_LEVEL + 1
-#define ENDPOINT_LEVEL                          INTERFACE_LEVEL + 1
+#define CONFIGURATION_DESCRIPTOR_LEVEL  ROOT_LEVEL + 1
+#define INTERFACE_LEVEL                 CONFIGURATION_DESCRIPTOR_LEVEL + 1
+#define ENDPOINT_LEVEL                  INTERFACE_LEVEL + 1
 #define HID_DESCRIPTOR_LEVEL			INTERFACE_LEVEL + 1
 #define DFU_DESCRIPTOR_LEVEL			INTERFACE_LEVEL + 1
 #define CCID_DESCRIPTOR_LEVEL			INTERFACE_LEVEL + 1
 #define HUB_DESCRIPTOR_LEVEL			ROOT_LEVEL + 1
-#define DEVICE_QUAL_DESCRIPTOR_LEVEL            ROOT_LEVEL + 1
+#define DEVICE_QUAL_DESCRIPTOR_LEVEL    ROOT_LEVEL + 1
 #define	BOS_DESCRIPTOR_LEVEL			ROOT_LEVEL + 1
 
 enum {

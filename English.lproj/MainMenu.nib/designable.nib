@@ -247,12 +247,12 @@
                                         <popUpButton verticalHuggingPriority="750" id="229">
                                             <rect key="frame" x="82" y="379" width="81" height="22"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="clipping" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="100229">
+                                            <popUpButtonCell key="cell" type="push" title="USB" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="clipping" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="230" id="100229">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <menu key="menu" title="OtherViews" id="228">
                                                     <items>
-                                                        <menuItem title="USB" id="230"/>
+                                                        <menuItem title="USB" state="on" id="230"/>
                                                         <menuItem title="All" tag="1" id="226"/>
                                                     </items>
                                                 </menu>
@@ -965,7 +965,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <clipView key="contentView" id="4DD-Fh-ZoM">
                         <rect key="frame" x="1" y="17" width="573" height="127"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" autosaveColumns="NO" rowHeight="15" headerView="300461" indentationPerLevel="16" autoresizesOutlineColumn="YES" outlineTableColumn="460" id="459">
                                 <rect key="frame" x="0.0" y="0.0" width="573" height="17"/>

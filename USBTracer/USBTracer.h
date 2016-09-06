@@ -1,22 +1,23 @@
 /*
- * Copyright © 2009-2013 Apple Inc.  All rights reserved.
+ * Copyright © 2009 Apple Inc.  All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
- * This file contains Original Code and/or Modifications of Original Code
- * as defined in and that are subject to the Apple Public Source License
- * Version 2.0 (the 'License'). You may not use this file except in
- * compliance with the License. Please obtain a copy of the License at
- * http://www.opensource.apple.com/apsl/ and read it before using this
- * file.
+ * "Portions Copyright (c) 1999 Apple Inc.  All Rights
+ * Reserved.  This file contains Original Code and/or Modifications of
+ * Original Code as defined in and that are subject to the Apple Public
+ * Source License Version 1.0 (the 'License').	You may not use this file
+ * except in compliance with the License.  Please obtain a copy of the
+ * License at http://www.apple.com/publicsource and read it before using
+ * this file.
  * 
  * The Original Code and all software distributed under the License are
  * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
  * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
- * Please see the License for the specific language governing rights and
- * limitations under the License.
+ * FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT.  Please see the
+ * License for the specific language governing rights and limitations
+ * under the License."
  * 
  * @APPLE_LICENSE_HEADER_END@
  */
@@ -45,12 +46,13 @@
 #include <sys/wait.h>
 #include <sys/file.h>
 
-#include <libutil.h>		// for reexec_to_match_kernel()
+// PHT #include <libutil.h>		// for reexec_to_match_kernel()
+#include "libutil.h"		// PHT // for reexec_to_match_kernel()
+#include "kdebug.h"         // PHT
 #include <mach/mach_host.h> // for host_info()
 
 #include <IOKit/pwr_mgt/IOPM.h>
 #include <IOKit/usb/USB.h>
-
 #include "USBTracepoints.h"
 	
 #ifndef KERNEL_PRIVATE
@@ -62,6 +64,17 @@
 #endif // KERNEL_PRIVATE
 
 #include <AvailabilityMacros.h>
+
+// Set the following to 1 when you don't want to support SSpeed in Zin, previous to a seed:
+#if 0
+	#if defined(MAC_OS_X_VERSION_10_8)
+		#undef SUPPORTS_SS_USB
+	#else
+		#define SUPPORTS_SS_USB 1
+	#endif
+#else
+	#define SUPPORTS_SS_USB 1
+#endif
 
 
 #include "USBTracepoints.h"
@@ -82,11 +95,11 @@
 //	Constants
 //—————————————————————————————————————————————————————————————————————————————
 
-#define kTraceBufferSampleSize			1000000
+#define kTraceBufferSampleSize			65500
 #define kMicrosecondsPerSecond			1000000
 #define kMicrosecondsPerMillisecond		1000
 #define kPrintMaskAllTracepoints		0x80000000
-#define kTimeStringSize					44
+#define kTimeStringSize					17
 #define kTimeStampKernel				0x1
 #define kTimeStampLocalTime				0x2
 #define kPrintStartToken				"->"
@@ -110,27 +123,6 @@ typedef struct {
 	uint32_t	cpuid;
 } trace_info;
 
-// Constants that define the different power states
-enum
-{
-    kUSBOff				= 0,				// controller is reset, nothing is attached
-    kUSBStateRestart	= 1,				// same as OFF
-    kUSBSleep			= 2,				// controller is suspended, preparing to lose main power
-    kUSBLowPower		= 3,				// controller is suspended, power remains on
-    kUSBOn				= 4,				// up and running
-    kUSBBusPowerStates	= 5
-};
-
-#define	kIOUSBMessageMuxFromEHCIToXHCI				iokit_usb_msg(0xe1)		// 0xe00040e1  Message from the EHCI HC for ports mux transition from EHCI to XHCI
-#define	kIOUSBMessageMuxFromXHCIToEHCI				iokit_usb_msg(0xe2)		// 0xe00040e2  Message from the EHCI HC for ports mux transition from XHCI to EHCI
-#define kIOUSBMessageHubPortDeviceDisconnected      iokit_usb_msg(0x1b)		// 0xe000401b  Message sent by a built-in hub when a device was disconnected
-
-enum
-{
-    kUSBBusStateReset				= 0,				// bus is in RESET
-    kUSBBusStateSuspended			= 1,				// bus is in SUSPEND mode
-    kUSBBusStateRunning				= 2					// bus is operational
-};
 
 //—————————————————————————————————————————————————————————————————————————————
 //	OHCI Defines
@@ -377,6 +369,7 @@ enum{
 	
 };
 
+#ifdef SUPPORTS_SS_USB
 enum
 {
 	kXHCIBit0					= (1 << 0),
@@ -445,9 +438,8 @@ enum
 	kXHCITRB_StopEndpoint = 15,
 	kXHCITRB_SetTRDqPtr = 16,
 	kXHCITRB_ResetDevice = 17,
-    
+	
     kXHCITRB_GetPortBandwidth = 21,
-    kXHCITRB_ForceHeaderCommand = 22,
 	kXHCITRB_CMDNoOp = 23,
     
 	kXHCITRB_CMDNEC = 49,   // NEC vendor specific command to get firmware version
@@ -481,9 +473,7 @@ enum
 	kXHCITRB_IDT = kXHCIBit6,
 	kXHCITRB_BSR = kXHCIBit9,
 	kXHCITRB_BEI = kXHCIBit9,
-	kXHCITRB_TSP = kXHCIBit9,
 	kXHCITRB_DIR = kXHCIBit16,
-    kXHCITRB_SP  = kXHCIBit23,
 	
 	kXHCITRB_Normal_Len_Mask = XHCIBitRange(0, 16),
 	kXHCITRB_TDSize_Mask = XHCIBitRange(17, 21),
@@ -510,9 +500,6 @@ enum
 	kXHCITRB_Port_Mask = XHCIBitRange(24, 31),
 	kXHCITRB_Port_Shift = XHCIBitRangePhase(24, 31),
 	
-    kXHCIStrCtx_SCT_Mask = XHCIBitRange(1,3),
-	kXHCIStrCtx_SCT_Shift = XHCIBitRangePhase(1,3),
-
     // Section 6.4.5 TRB Completion Codes
 	kXHCITRB_CC_Invalid = 0,
 	kXHCITRB_CC_Success = 1,
@@ -568,6 +555,7 @@ enum
 	kXHCIFrameMask = XHCIBitRange(0,10)	
 };
 
+#endif
 
 
 //—————————————————————————————————————————————————————————————————————————————
@@ -626,10 +614,12 @@ static void CollectTraceEHCIUIM	( kd_buf tracepoint ); //21,
 static void CollectTraceEHCIHubInfo	( kd_buf tracepoint ); //22,
 static void CollectTraceEHCIInterrupts	( kd_buf tracepoint ); //23,
 static void CollectTraceEHCIDumpQs ( kd_buf tracepoint ); //24,
+#ifdef SUPPORTS_SS_USB
 static void CollectTraceXHCI ( kd_buf tracepoint );				//20,
 static void CollectTraceXHCIInterrupts	( kd_buf tracepoint ); //23,
 static void CollectTraceXHCIRootHubs	( kd_buf tracepoint ); //24,
 static void CollectTraceXHCIPrintTRB	( kd_buf tracepoint ); //25,
+#endif
 
 static void CollectTraceHubPolicyMaker	( kd_buf tracepoint ); //35,
 static void CollectTraceCompositeDriver ( kd_buf tracepoint ); //36,
@@ -657,11 +647,3 @@ static void IndentIn ( int numOfTabs );
 static void IndentOut ( int numOfTabs );
 
 const char * DecodeUSBTransferType( uint32_t type );
-const char * DecodeUSBPowerState( uint32_t type );
-const char * DecodeXHCIMuxTransitionMessage( uint32_t type );
-const char * DecodeUSBBusState( uint32_t type );
-const char * DecodeTestMode( uint32_t type );
-const char * PrintXHCICommandTRBs(trace_info *info, uintptr_t xhci, uint32_t offs0, uint32_t offs4, uint32_t offs8, uint32_t offsC);
-
-const char * GetSpeedName(UInt32 speed);
-

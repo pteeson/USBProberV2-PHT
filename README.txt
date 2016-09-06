@@ -1,5 +1,5 @@
 This is a version of Apple's USBProberV2 which has been fixed so as to build under 
-Xcode 6.4 and OS X Yosemite 10.10.5 and deployment on 10.9 or 10.10.
+Xcode 6.4 and OS X Yosemite 10.10.5 and deployment on 10.9, 10.10, or 10.11.
 No other OS X deployment versions have been tested.
 For OS C versions prior to 10.9 use Apple's distribution.
 

@@ -16,7 +16,7 @@
 		8DD76F690486A84900D96B5E /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 8;
-			dstPath = /usr/share/man/man1/;
+			dstPath = /usr/share/man/man1;
 			dstSubfolderSpec = 0;
 			files = (
 			);
@@ -25,6 +25,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		01340FFB1D299ECB00501E11 /* IOUSBFamily.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = IOUSBFamily.plist; sourceTree = "<group>"; };
+		01340FFC1D299ECB00501E11 /* libutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libutil.h; sourceTree = "<group>"; };
+		01340FFD1D299ECB00501E11 /* USBTracepoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USBTracepoints.h; sourceTree = "<group>"; };
+		01340FFE1D299FAF00501E11 /* IOUSBFamilyInfoPlist.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOUSBFamilyInfoPlist.pch; sourceTree = "<group>"; };
+		01E88DFF1D2A0F2200074346 /* kdebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kdebug.h; sourceTree = "<group>"; };
 		14D294480EB94AED00340313 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
 		3E9A5B0D0F1808E8006B4955 /* USBTracer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = USBTracer.cpp; sourceTree = "<group>"; };
 		3E9A5B0E0F1808E8006B4955 /* USBTracer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USBTracer.h; sourceTree = "<group>"; };
@@ -59,8 +64,13 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				3E9A5B0D0F1808E8006B4955 /* USBTracer.cpp */,
+				01E88DFF1D2A0F2200074346 /* kdebug.h */,
+				01340FFE1D299FAF00501E11 /* IOUSBFamilyInfoPlist.pch */,
+				01340FFB1D299ECB00501E11 /* IOUSBFamily.plist */,
+				01340FFC1D299ECB00501E11 /* libutil.h */,
+				01340FFD1D299ECB00501E11 /* USBTracepoints.h */,
 				3E9A5B0E0F1808E8006B4955 /* USBTracer.h */,
+				3E9A5B0D0F1808E8006B4955 /* USBTracer.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -99,9 +109,16 @@
 /* Begin PBXProject section */
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+			};
 			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "USBTracer" */;
 			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
 			mainGroup = 08FB7794FE84155DC02AAC07 /* SAMLogger */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -165,12 +182,12 @@
 		1DEB923608733DC60010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				ONLY_ACTIVE_ARCH = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
 				VALID_ARCHS = "i386 x86_64";
 			};
@@ -179,11 +196,11 @@
 		1DEB923708733DC60010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = NO;
 				PREBINDING = NO;
 				VALID_ARCHS = "i386 x86_64";
