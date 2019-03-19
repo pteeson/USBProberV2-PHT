@@ -1,5 +1,5 @@
 /*
- * Copyright © 1998-2012 Apple Inc.  All rights reserved.
+ * Copyright ï¿½ 1998-2012 Apple Inc.  All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  *
@@ -27,11 +27,12 @@
 @implementation NSOutlineView(OutlineViewAdditions)
 
 - (void)itemDoubleClicked {
-    int selectedRow = [self selectedRow];
+    int selectedRow = (int)[self selectedRow];
     
     if (![self isExpandable:[self itemAtRow:selectedRow]]) {
         return;
-    } else if ([[NSApp currentEvent] modifierFlags] & NSAlternateKeyMask) {
+//    } else if ([[NSApp currentEvent] modifierFlags] & NSAlternateKeyMask) {
+    } else if ([[NSApp currentEvent] modifierFlags] & NSEventModifierFlagOption) { //PHT 2019 deprecation issue
         if ([self isItemExpanded:[self itemAtRow:selectedRow]])
             [self collapseItem:[self itemAtRow:selectedRow]];
         [self expandItem:[self itemAtRow:selectedRow] expandChildren:YES];
@@ -55,7 +56,7 @@
     [pasteboard declareTypes: [NSArray arrayWithObject: NSStringPboardType] owner: NULL];
 	while (current != NSNotFound) {
 		int i;
-        int levelForRow = [self levelForRow:current];
+        int levelForRow = (int)[self levelForRow:current]; // PHT 2019 added cast to int
         for (i=0;i<levelForRow;i++)
             [pasteboardString appendString:@"    "];
         

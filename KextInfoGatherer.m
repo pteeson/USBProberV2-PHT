@@ -23,7 +23,7 @@
 
 // PHT
 // PHT Apple had removed moste of the source code from this file
-// PHT See at the bottom where it is commented out but prezerved.
+// PHT See at the bottom where it is commented out but preserved.
 // PHT I dug out the original source from the OS X 10.6.2 Apple Open Source
 // PHT and restored it in the KextInfoGatherer.h and KextInfoGatherer.m
 // PHT

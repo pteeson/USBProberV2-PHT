@@ -1,5 +1,5 @@
 /*
- * Copyright © 1998-2012 Apple Inc.  All rights reserved.
+ * Copyright ï¿½ 1998-2012 Apple Inc.  All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  *
@@ -90,7 +90,7 @@
 }
 
 - (int)childrenCount {
-    return [_children count];
+    return (int)[_children count]; // PHT 2019 added cast to int
 }
 
 - (NSArray *)children {

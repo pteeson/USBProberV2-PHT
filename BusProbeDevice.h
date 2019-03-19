@@ -1,5 +1,5 @@
 /*
- * Copyright © 1998-2012 Apple Inc.  All rights reserved.
+ * Copyright ï¿½ 1998-2012 Apple Inc.  All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  *
@@ -64,8 +64,8 @@
 - (void)setVendorID:(UInt32)vendorID;
 - (UInt32)productID;
 - (void)setProductID:(UInt32)productID;
-- (UInt32)locationID;
-- (void)setLocationID:(UInt32)locationID;
+//PHT 2019 Duplicate see above - (UInt32)locationID;
+//PHT 2019 Duplicate see above - (void)setLocationID:(UInt32)locationID;
 - (BusProbeClass *)deviceClassInfo;
 - (void)setDeviceClassInfo:(BusProbeClass *)classInfo;
 - (BusProbeClass *)lastInterfaceClassInfo;

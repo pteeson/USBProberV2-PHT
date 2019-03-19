@@ -165,9 +165,9 @@ static int remainingFreshEntries = 0;
 - (IBAction)ChangeLoggingLevel:(id)sender
 {
     if (_logger != nil) {
-        [_logger setDebuggerOptions:-1 setLevel:true level:[[sender selectedItem] tag] setType:false type:0];
+        [_logger setDebuggerOptions:-1 setLevel:true level:(int)[[sender selectedItem] tag] setType:false type:0]; // PHT 2019 added cast to int
     }
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:[[sender selectedItem] tag]] forKey:@"USBLoggerLoggingLevel"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:(int)[[sender selectedItem] tag]] forKey:@"USBLoggerLoggingLevel"];
 }
 
 - (IBAction)ClearOutput:(id)sender
@@ -247,7 +247,8 @@ static int remainingFreshEntries = 0;
         NSAlert *alert = [[NSAlert alloc] init];            // PHT
         [alert addButtonWithTitle:@"Install"];              // PHT
         [alert addButtonWithTitle:@"Cancel"];               // PHT
-        [alert setAlertStyle:NSCriticalAlertStyle];         // PHT
+//        [alert setAlertStyle:NSCriticalAlertStyle];       // PHT
+        [alert setAlertStyle:NSAlertStyleCritical];
         alert.messageText = @"Missing Kernel Extension";    // PHT
         alert.informativeText = @"The required kernel extension \"KLog.kext\" is not installed. Would you like to install it now?";             // PHT
         NSModalResponse result = [alert runModal];          // PHT
@@ -275,7 +276,8 @@ static int remainingFreshEntries = 0;
         NSAlert *alert = [[NSAlert alloc] init];            // PHT
         [alert addButtonWithTitle:@"Upgrade"];              // PHT
         [alert addButtonWithTitle:@"Cancel"];               // PHT
-        [alert setAlertStyle:NSCriticalAlertStyle];         // PHT
+//        [alert setAlertStyle:NSCriticalAlertStyle];       // PHT
+        [alert setAlertStyle:NSAlertStyleCritical];         // PHT 2019 deprecation issue
         alert.messageText = @"Wrong revision for Kernel Extension";    // PHT
         alert.informativeText = @"The required kernel extension \"KLog.kext\" is not the right revision. Would you like to upgrade it now?";                                           // PHT
         NSModalResponse result = [alert runModal];           // PHT
@@ -293,7 +295,8 @@ static int remainingFreshEntries = 0;
 // PHT Please quit and restart.", @"OK", nil, nil);
                 NSAlert *alert = [[NSAlert alloc] init];            // PHT
                 [alert addButtonWithTitle:@"OK"];                   // PHT
-                [alert setAlertStyle:NSCriticalAlertStyle];         // PHT
+//                [alert setAlertStyle:NSCriticalAlertStyle];         // PHT
+                [alert setAlertStyle:NSAlertStyleCritical];         // PHT 2019 deprecation issue
                 alert.messageText = @"Need to Restart";             // PHT
                 alert.informativeText = @"The required kernel extension \"KLog.kext\" was installed. Please quit and restart.";                                      // PHT
                 [alert runModal];                                   // PHT
@@ -356,7 +359,7 @@ static int remainingFreshEntries = 0;
 
 - (void) actuallyStartLogging {
     if (_logger == nil) {
-        _logger = [[USBLogger alloc] initWithListener:self level:[[LoggingLevelPopUp selectedItem] tag]];
+        _logger = [[USBLogger alloc] initWithListener:self level:(int)[[LoggingLevelPopUp selectedItem] tag]]; // PHT 2019 added cast to int
         
     }
     [_logger beginLogging];
@@ -467,7 +470,8 @@ static int remainingFreshEntries = 0;
 
         NSAlert *alert = [[NSAlert alloc] init];            // PHT
         [alert addButtonWithTitle:@"OK"];                   // PHT
-        [alert setAlertStyle:NSCriticalAlertStyle];         // PHT
+ //       [alert setAlertStyle:NSCriticalAlertStyle];       // PHT
+        [alert setAlertStyle:NSAlertStyleCritical];         // PHT 2019 deprecation issue
         alert.messageText = @"Missing Source File";         // PHT
         alert.informativeText = @"\"KLog.kext\" could not be installed because it is missing from the application bundle."; // PHT
         [alert runModal];                                   // PHT
@@ -545,7 +549,8 @@ static int remainingFreshEntries = 0;
 // PHT   from the application bundle.", @"Okay", nil, nil);
             NSAlert *alert = [[NSAlert alloc] init];            // PHT
             [alert addButtonWithTitle:@"OK"];                   // PHT
-            [alert setAlertStyle:NSCriticalAlertStyle];         // PHT
+//            [alert setAlertStyle:NSCriticalAlertStyle];         // PHT
+            [alert setAlertStyle:NSAlertStyleCritical];         // PHT 2019 deprecation issue
             alert.messageText = @"Missing Source File";         // PHT
             alert.informativeText = @"\"KLog.kext\" could not be installed because it is missing from the application bundle."; // PHT
             [alert runModal];                                   // PHT

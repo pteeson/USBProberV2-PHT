@@ -134,7 +134,7 @@ double timeStampFromLogLine(NSString * line);
     }
     
     NSArray *displayedLines = [LoggerController displayedLogLines];
-    int numberOfLines = [displayedLines count];
+    int numberOfLines = (int)[displayedLines count]; // PHT 2019 added cast to int
     int first = 0, middle = 0, last = numberOfLines-1;
     double midTimeStamp = 0;
     

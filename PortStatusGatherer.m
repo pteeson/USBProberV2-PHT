@@ -469,7 +469,7 @@ ErrorExit:
 	{  
 		goto Exit;
 	}
-	ports = output[0];
+	ports = (UInt32)output[0];  // PHT 2019 added cast to UInt32
 	
 	// Get the Power Management state for each port
 	for ( i = 1; i <= ports;  i++)
@@ -481,7 +481,7 @@ ErrorExit:
 		{  
 			continue;        
 		}
-		portState[i-1] = output[0];
+		portState[i-1] = (UInt32)output[0]; // PHT 2019 added cast to UInt32
 	}
 	
 	IOConnectRelease(hubUserClientConnection);

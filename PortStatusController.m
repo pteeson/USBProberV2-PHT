@@ -218,9 +218,9 @@
     if (ov == PortStatusOutputOV) {
         if (item == nil) 
 		{
-            return [_rootNode childAtIndex:index];
+            return [_rootNode childAtIndex:(int)index]; // PHT 2019 added cast to int
 		}
-        return [(OutlineViewNode *)item childAtIndex:index];
+        return [(OutlineViewNode *)item childAtIndex:(int)index]; // PHT 2019 added cast to int
 	}
     return nil;
 }

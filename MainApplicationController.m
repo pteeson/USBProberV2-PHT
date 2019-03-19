@@ -106,7 +106,7 @@
 
 - (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem {
     if (tabView == MainTabView) {
-        int index = [tabView indexOfTabViewItem:[tabView selectedTabViewItem]];
+        int index = (int)[tabView indexOfTabViewItem:[tabView selectedTabViewItem]]; // PHT 2019 added cast to int
         switch (index) {
             case 0:
                 [[BusProbeOutput window] makeFirstResponder:BusProbeOutput];
@@ -151,7 +151,8 @@
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
 	NSInteger index = [MainTabView indexOfTabViewItem:[MainTabView selectedTabViewItem]];
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:index] forKey:@"SelectedMainTabViewItem"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:(int)index] // PHT 2019 added cast to int
+                                forKey:@"SelectedMainTabViewItem"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

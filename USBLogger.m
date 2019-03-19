@@ -1,5 +1,5 @@
 /*
- * Copyright © 1998-2012 Apple Inc.  All rights reserved.
+ * Copyright ï¿½ 1998-2012 Apple Inc.  All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  *
@@ -298,7 +298,7 @@
 #if 1
 		// Translate the kernel timestamp to a date stamp
 		time_t timeStamp = msgTime64.tv_sec;
-		UInt32 microseconds = msgTime64.tv_usec;
+		UInt32 microseconds = (UInt32)msgTime64.tv_usec;  // PHT 2019 added cast to UInt32
 		const char *timestr = asctime(localtime(&timeStamp));
 		
         logString = [[NSString alloc] initWithFormat:@"%.15s.%03d  [%d]\t%.*s\n",&timestr[4], (microseconds / 1000), level, (int)(memSize-_OFFSET), QBuffer+_OFFSET];

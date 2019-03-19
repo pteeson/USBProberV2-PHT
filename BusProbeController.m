@@ -368,9 +368,9 @@
     if (item == nil) {
         return [_devicesArray objectAtIndex:index];
     } else if ([item class] == [BusProbeDevice class]) {
-        return [[(BusProbeDevice *)item rootNode] childAtIndex:index];
+        return [[(BusProbeDevice *)item rootNode] childAtIndex:(int)index]; // PHT 2019 added cast to int
     }
-    return [(OutlineViewNode *)item childAtIndex:index];
+    return [(OutlineViewNode *)item childAtIndex:(int)index]; // PHT 2019 added cast to int
 }
 
 - (BOOL)outlineView:(NSOutlineView *)ov isItemExpandable:(id)item

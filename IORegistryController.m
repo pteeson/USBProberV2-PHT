@@ -192,14 +192,14 @@
 {
     if (ov == IORegOutputOV) {
         if (item == nil) {
-            return [_rootNode childAtIndex:index];
+            return [_rootNode childAtIndex:(int)index]; // PHT 2019 added cast to int
         }
-        return [(OutlineViewNode *)item childAtIndex:index];
+        return [(OutlineViewNode *)item childAtIndex:(int)index]; // PHT 2019 added cast to int
     } else if (IORegDetailedOutput) {
         if (item == nil) {
-            return [_detailRootNode childAtIndex:index];
+            return [_detailRootNode childAtIndex:(int)index]; // PHT 2019 added cast to int
         }
-        return [(OutlineViewNode *)item childAtIndex:index];
+        return [(OutlineViewNode *)item childAtIndex:(int)index]; // PHT 2019 added cast to int
     }
     
     return nil;

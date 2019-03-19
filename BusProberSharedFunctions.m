@@ -1,5 +1,5 @@
 /*
- * Copyright © 1998-2012 Apple Inc.  All rights reserved.
+ * Copyright ï¿½ 1998-2012 Apple Inc.  All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  *
@@ -156,7 +156,9 @@ int GetStringDescriptor(IOUSBDeviceRef deviceIntf, UInt8 descIndex, void *buf, U
     req.wIndex = lang;	// English
     req.wLength = 2;
     req.pData = &desc;
-    verify_noerr(err = (*deviceIntf)->DeviceRequest(deviceIntf, &req));
+    //    verify_noerr(err = (*deviceIntf)->DeviceRequest(deviceIntf, &req));
+    // PHT See comments in AssertMacros.h
+    __Verify_noErr(err = (*deviceIntf)->DeviceRequest(deviceIntf, &req));
     if ( (err != kIOReturnSuccess) && (err != kIOReturnOverrun) )
         return -1;
     
@@ -178,7 +180,9 @@ int GetStringDescriptor(IOUSBDeviceRef deviceIntf, UInt8 descIndex, void *buf, U
     req.wLength = stringLen;
     req.pData = buf;
     
-    verify_noerr(err = (*deviceIntf)->DeviceRequest(deviceIntf, &req));
+    //    verify_noerr(err = (*deviceIntf)->DeviceRequest(deviceIntf, &req));
+    // PHT See comments in AssertMacros.h
+    __Verify_noErr(err = (*deviceIntf)->DeviceRequest(deviceIntf, &req));
 	if ( err ) return -1;
     
     return req.wLenDone;
@@ -197,7 +201,9 @@ int GetClassDescriptor(IOUSBDeviceRef deviceIntf, UInt8 descType, UInt8 descInde
     req.wLength = len;
     req.pData = buf;
     
-    verify_noerr(err = (*deviceIntf)->DeviceRequest(deviceIntf, &req));
+    //    verify_noerr(err = (*deviceIntf)->DeviceRequest(deviceIntf, &req));
+    // PHT See comments in AssertMacros.h
+    __Verify_noErr(err = (*deviceIntf)->DeviceRequest(deviceIntf, &req));
     if (err) return -1;
     return req.wLenDone;
 }
@@ -220,7 +226,9 @@ int GetDescriptorFromInterface(IOUSBDeviceRef deviceIntf, UInt8 descType, UInt8 
     req.wLength = len;
     req.pData = buf;
     
-    verify_noerr(err = (*deviceIntf)->DeviceRequest(deviceIntf, &req));
+    //    verify_noerr(err = (*deviceIntf)->DeviceRequest(deviceIntf, &req));
+    // PHT See comments in AssertMacros.h
+    __Verify_noErr(err = (*deviceIntf)->DeviceRequest(deviceIntf, &req));
     if (err) return -1;
     return req.wLenDone;
 }
@@ -239,7 +247,9 @@ int GetCurrentConfiguration(IOUSBDeviceRef deviceIntf)
     req.wLength = 1;
     req.pData = &buf;
     
-    verify_noerr(err = (*deviceIntf)->DeviceRequest(deviceIntf, &req));
+    //    verify_noerr(err = (*deviceIntf)->DeviceRequest(deviceIntf, &req));
+    // PHT See comments in AssertMacros.h
+    __Verify_noErr(err = (*deviceIntf)->DeviceRequest(deviceIntf, &req));
     if (err) return -1;
     return buf;
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright © 1998-2012 Apple Inc.  All rights reserved.
+ * Copyright ï¿½ 1998-2012 Apple Inc.  All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  *
@@ -71,7 +71,8 @@
     NSMutableString *finalString = [[NSMutableString alloc] init];
     int row;
     BOOL doneOneRow = NO;
-    int numberOfRows = [self numberOfRows];
+//PHT    int numberOfRows = [self numberOfRows];
+    NSInteger numberOfRows = [self numberOfRows];
     
     for (row = 0; row < numberOfRows; row++) {
         NSMutableString *thisRow = [[NSMutableString alloc] init];
