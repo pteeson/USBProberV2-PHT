@@ -1,8 +1,10 @@
-2019-03-16 Building for Sierra macOS 10.12.6 Using Xcode 8.3.3 with 10.12 SDK
-Also compiles on Xcode 9.2 for High Sierra macOS 10.13 but not tested in High Sierra
-as I have not installed it.
+2019-03-16 This is a version of Apple's USBProberV2 which has been fixed
+so as to build under Sierra macOS 10.12.6 Using Xcode 8.3.3 with 10.12 SDK.
 
-Changes made:
+Also compiles on Sierra using Xcode 9.2 for High Sierra macOS 10.13
+but not tested in High Sierra as I have not installed it.
+
+Summary of changes made:
 1. In file BusProberSharedFunction.m replaced all occurences of _verify_noerr with
 new macro __Verify_noErr. Old macros no loger supported in Sierra.
 See AssertMacros.h
@@ -10,11 +12,17 @@ See AssertMacros.h
 2. Sierra requires macOS 10.11 as minimum SDK. For Xcode 8.3.3 changed Build settings
 Base SDK to Latest macOS (macOS 10.12) and Deployment Target macOS 10.12.
 
+I have not bothere to try building for El Capitan as I never installed it.
+But it wil probbably work because when I set the Deployment Target to macOS 10.11.
+it compiled fine. The only Warning was about linking with certain /usr files
+from macOS 10.12 while compiling with macOS 10.11.
+(I don't think it's going to be fragile but you have been warned)
+
 3. Comment out duplicates in file BusProberDevice.h
 
 4. Fixed many Warnings of type Value Conversion issue in many files.
 
-5. Fixed several deprecations -7 still left over from previous upload
+5. Fixed several deprecations -7 still left over from Previous upload
 
 ====================== Previous upload ==========================
 

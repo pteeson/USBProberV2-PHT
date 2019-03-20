@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		010539381CDBDDD000140FFD /* KLog.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3ED5D6840DD4A2CE00AD5562 /* KLog.kext */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		012C051C1D1C54620079B18E /* KextInfoGatherer.m in Sources */ = {isa = PBXBuildFile; fileRef = 012C051B1D1C54620079B18E /* KextInfoGatherer.m */; };
-		017F84D51CDA98D700F97EF8 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0156BA651CD91D7D0043B846 /* README.txt */; };
+		01359E2B2242D2B2005A9D6A /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 01359E2A2242D2B2005A9D6A /* README.txt */; };
 		017F84D61CDA98D700F97EF8 /* USBProberV2-PHT log of fixes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0156BA661CD91D7D0043B846 /* USBProberV2-PHT log of fixes.txt */; };
 		3E0EA9FB050D22BA009D1D9C /* USBLoggerFilterWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E0EA950050D21FB009D1D9C /* USBLoggerFilterWindowController.h */; };
 		3E0EA9FC050D22BA009D1D9C /* USBLoggerFilterWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EA951050D21FB009D1D9C /* USBLoggerFilterWindowController.m */; };
@@ -125,8 +125,8 @@
 		012C05191D1C53E70079B18E /* KextInfoGatherer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KextInfoGatherer.h; sourceTree = "<group>"; };
 		012C051B1D1C54620079B18E /* KextInfoGatherer.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = KextInfoGatherer.m; sourceTree = "<group>"; };
 		0131615A1D235F3100908E63 /* OSReturn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSReturn.h; sourceTree = "<group>"; };
+		01359E2A2242D2B2005A9D6A /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		014DF8F51D22234400A911B7 /* OSKext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSKext.h; sourceTree = "<group>"; };
-		0156BA651CD91D7D0043B846 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		0156BA661CD91D7D0043B846 /* USBProberV2-PHT log of fixes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "USBProberV2-PHT log of fixes.txt"; sourceTree = "<group>"; };
 		01B132261CF38B3A00BDC0D8 /* TO DO list.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "TO DO list.txt"; sourceTree = "<group>"; };
 		01C3B63C1D2364E20028E84D /* OSKextLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSKextLib.h; sourceTree = "<group>"; };
@@ -299,7 +299,7 @@
 		29B97314FDCFA39411CA2CEA /* USB Prober */ = {
 			isa = PBXGroup;
 			children = (
-				0156BA651CD91D7D0043B846 /* README.txt */,
+				01359E2A2242D2B2005A9D6A /* README.txt */,
 				0156BA661CD91D7D0043B846 /* USBProberV2-PHT log of fixes.txt */,
 				01B132261CF38B3A00BDC0D8 /* TO DO list.txt */,
 				3E146F8B050D1EE700DE0AA3 /* KLog */,
@@ -602,6 +602,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01359E2B2242D2B2005A9D6A /* README.txt in Resources */,
 				3ED5D67C0DD4A2CE00AD5562 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -610,7 +611,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				017F84D51CDA98D700F97EF8 /* README.txt in Resources */,
 				017F84D61CDA98D700F97EF8 /* USBProberV2-PHT log of fixes.txt in Resources */,
 				3E0EA9FD050D2305009D1D9C /* clean.tiff in Resources */,
 				3E0EA9FE050D2305009D1D9C /* reload.tiff in Resources */,
