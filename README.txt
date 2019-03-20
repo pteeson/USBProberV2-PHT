@@ -24,6 +24,9 @@ from macOS 10.12 while compiling with macOS 10.11.
 
 5. Fixed several deprecations -7 still left over from Previous upload
 
+6. Fixed KextInfoGatherer.h and restored KextInfoGatherer to original soure.
+Removed files OSKext.h OSKextLib.h, OSKextLibPrivate.h, OSReturn.h
+
 ====================== Previous upload ==========================
 
 This is a version of Apple's USBProberV2 which has been fixed so as to build under

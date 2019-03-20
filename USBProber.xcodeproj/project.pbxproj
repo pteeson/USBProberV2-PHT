@@ -124,13 +124,9 @@
 /* Begin PBXFileReference section */
 		012C05191D1C53E70079B18E /* KextInfoGatherer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KextInfoGatherer.h; sourceTree = "<group>"; };
 		012C051B1D1C54620079B18E /* KextInfoGatherer.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = KextInfoGatherer.m; sourceTree = "<group>"; };
-		0131615A1D235F3100908E63 /* OSReturn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSReturn.h; sourceTree = "<group>"; };
 		01359E2A2242D2B2005A9D6A /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
-		014DF8F51D22234400A911B7 /* OSKext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSKext.h; sourceTree = "<group>"; };
 		0156BA661CD91D7D0043B846 /* USBProberV2-PHT log of fixes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "USBProberV2-PHT log of fixes.txt"; sourceTree = "<group>"; };
 		01B132261CF38B3A00BDC0D8 /* TO DO list.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "TO DO list.txt"; sourceTree = "<group>"; };
-		01C3B63C1D2364E20028E84D /* OSKextLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSKextLib.h; sourceTree = "<group>"; };
-		01C3B63D1D23654A0028E84D /* OSKextLibPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSKextLibPrivate.h; sourceTree = "<group>"; };
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -438,10 +434,6 @@
 			children = (
 				72BE7DC504A3875800EB1451 /* KernelExtensionsController.h */,
 				72BE7DC404A3875800EB1451 /* KernelExtensionsController.m */,
-				014DF8F51D22234400A911B7 /* OSKext.h */,
-				0131615A1D235F3100908E63 /* OSReturn.h */,
-				01C3B63C1D2364E20028E84D /* OSKextLib.h */,
-				01C3B63D1D23654A0028E84D /* OSKextLibPrivate.h */,
 				012C05191D1C53E70079B18E /* KextInfoGatherer.h */,
 				012C051B1D1C54620079B18E /* KextInfoGatherer.m */,
 			);

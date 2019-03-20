@@ -22,7 +22,8 @@
  */
 
 // PHT #import <IOKit/kext/OSKext.h>
-#import "OSKext.h"  // PHT replaced above with this file I created from the OS X 10.6.2 IOKit
+// PHT 2019 Use KextManager 
+#import <IOKit/kext/KextManager.h>
 #import <Foundation/Foundation.h>
 #import <mach/mach.h>
 #import <mach/mach_error.h>

@@ -23,11 +23,15 @@ Search for //PHT 2019 VC issue to find them.
 e.g. 'NSCriticalAlertStyle' is deprecated: first deprecated in macOS 10.12
 Search for //PHT 2019 deprecation issue to find them.
 
+6. Restored original KextInfoGatherer.m text and removed Previous upload comments
+Also edited KextInfoGetherer to use KextManager.h instead of OSKext.h
+Removed files OSKext.h OSKextLib.h, OSKextLibPrivate.h, OSReturn.h
 
 TO DO: Figure out how to use SDK macOS 10.11 from within Xcode 8.3.3.
 TO DO: i.e. use /usr/.. linked with SDK 10.11
 TO DO: Maybe that way can also work for Xcode 10.9.2 also
 TO DO: which is neede to compile for macOS 10.13 High Sierra
+
 ====================== Previous upload ==========================
 What I did to compile USBProberV2 on Yosemite 10.10.5 & Xcode 6.4
 
