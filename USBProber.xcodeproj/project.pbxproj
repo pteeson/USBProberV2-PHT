@@ -540,9 +540,9 @@
 			productReference = 3ED5D6840DD4A2CE00AD5562 /* KLog.kext */;
 			productType = "com.apple.product-type.kernel-extension.iokit";
 		};
-		8D1107260486CEB800E47090 /* USB Prober */ = {
+		8D1107260486CEB800E47090 /* USBProber */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3E420D2A08E1B98300FD1873 /* Build configuration list for PBXNativeTarget "USB Prober" */;
+			buildConfigurationList = 3E420D2A08E1B98300FD1873 /* Build configuration list for PBXNativeTarget "USBProber" */;
 			buildPhases = (
 				8D1107270486CEB800E47090 /* Headers */,
 				8D1107290486CEB800E47090 /* Resources */,
@@ -555,7 +555,7 @@
 			dependencies = (
 				3ED5D6AD0DD4A9D600AD5562 /* PBXTargetDependency */,
 			);
-			name = "USB Prober";
+			name = USBProber;
 			productInstallPath = "$(HOME)/Applications";
 			productName = "USB Prober";
 			productReference = 8D1107320486CEB800E47090 /* USB Prober.app */;
@@ -584,7 +584,7 @@
 			projectRoot = "";
 			targets = (
 				3ED5D6730DD4A2CE00AD5562 /* KLog */,
-				8D1107260486CEB800E47090 /* USB Prober */,
+				8D1107260486CEB800E47090 /* USBProber */,
 			);
 		};
 /* End PBXProject section */
@@ -1044,7 +1044,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3E420D2A08E1B98300FD1873 /* Build configuration list for PBXNativeTarget "USB Prober" */ = {
+		3E420D2A08E1B98300FD1873 /* Build configuration list for PBXNativeTarget "USBProber" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3E420D2B08E1B98300FD1873 /* Development */,

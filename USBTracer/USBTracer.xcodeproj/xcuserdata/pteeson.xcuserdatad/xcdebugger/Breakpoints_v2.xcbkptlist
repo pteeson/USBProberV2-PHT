@@ -16,7 +16,7 @@
             startingLineNumber = "2845"
             endingLineNumber = "2845"
             landmarkName = "CollectTraceHub ( kd_buf tracepoint )"
-            landmarkType = "7">
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

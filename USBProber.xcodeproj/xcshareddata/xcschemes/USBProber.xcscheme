@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8D1107260486CEB800E47090"
                BuildableName = "USB Prober.app"
-               BlueprintName = "USB Prober"
+               BlueprintName = "USBProber"
                ReferencedContainer = "container:USBProber.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -48,10 +48,16 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8D1107260486CEB800E47090"
             BuildableName = "USB Prober.app"
-            BlueprintName = "USB Prober"
+            BlueprintName = "USBProber"
             ReferencedContainer = "container:USBProber.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "--help"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -67,7 +73,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8D1107260486CEB800E47090"
             BuildableName = "USB Prober.app"
-            BlueprintName = "USB Prober"
+            BlueprintName = "USBProber"
             ReferencedContainer = "container:USBProber.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
